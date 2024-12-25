@@ -3,11 +3,11 @@ import { connect } from "../mongodb/mongoose";
 
 export const createOrUpdateUser = async (
     id,
-    username,
-    emailaddresses,
     first_name,
     last_name,
-    image_url
+    image_url,
+    email_addresses,
+    username
 ) => {
 
     try {
@@ -18,7 +18,7 @@ export const createOrUpdateUser = async (
             {
                $set: {
                 username: username,
-                email: emailaddresses[0].email,
+                email: email_addresses[0].email,
                 firstname: first_name,
                 lastname: last_name,
                 avatar: image_url,

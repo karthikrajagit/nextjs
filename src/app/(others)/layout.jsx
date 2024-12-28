@@ -5,6 +5,7 @@ import { ClerkProvider, ClerkLoading, ClerkLoaded } from "@clerk/nextjs";
 import Loader from "@/components/Loader";
 import LeftSidebar from "@/components/LeftSidebar";
 import RightSidebar from "@/components/RightSidebar";
+import SessionWrapper from "@/components/SessionWrapper";
 
 
 
@@ -26,29 +27,29 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <ClerkProvider>
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <ClerkLoading>
-            <Loader/>
-          </ClerkLoading>
-        <ClerkLoaded>
-        <div className="flex justify-between max-w-6xl mx-auto">
-          <div className="hidden sm:inline sticky border-r pr-2 top-0 h-screen">
-            <LeftSidebar/>
-          </div>
-          <div className="w-2xl flex-1">
-            {children}
-          </div>
-           
-          <div className="lg:flex-col p-3 h-screen border-l hidden lg:flex w-[24rem]">
-            <RightSidebar/>
-          </div>
-        </div>
-        </ClerkLoaded>
-      </body>
-    </html>
+      <SessionWrapper>
+        <html lang='en'>
+          <body
+            className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+          >
+            <ClerkLoading>
+              <Loader />
+            </ClerkLoading>
+            <ClerkLoaded>
+              <div className='flex justify-between max-w-6xl mx-auto'>
+                <div className='hidden sm:inline border-r h-screen sticky top-0'>
+                  <LeftSidebar />
+                </div>
+
+                <div className='w-2xl flex-1'>{children}</div>
+                <div className='lg:flex-col p-3 h-screen border-l hidden lg:flex w-[24rem]'>
+                  <RightSidebar />
+                </div>
+              </div>
+            </ClerkLoaded>
+          </body>
+        </html>
+      </SessionWrapper>
     </ClerkProvider>
   );
 }

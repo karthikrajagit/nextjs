@@ -1,25 +1,22 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
+let initialized = false;
 
-let initialize = false;
-export async function connect() {
-    if (initialize) 
-    {
-        console.log('already initialized');
-        return;
-    }
-       
-    
-    try {
-        await mongoose.connect(process.env.MONGODB_URI,{
-            dbName: 'nextjs',
-            useNewUrlParser: true,
-            useUnifiedTopology: true
+export const connect = async () => {
+  mongoose.set('strictQuery', true);
+  if (initialized) {
+    console.log('Already connected to MongoDB');
+    return;
+  }
+
+  try {
+    await mongoose.connect(process.env.MONGODB_URI, {
+      dbName: "nextjs",
+      serverSelectionTimeoutMS: 30000,
     });
     console.log('Connected to MongoDB');
-    initialize = true;
-    } catch (error) {
-        console.log("Error being connect",error);
-    }
-    
-}
+    initialized = true;
+  } catch (error) {
+    console.log('Error connecting to MongoDB:', error);
+  }
+};

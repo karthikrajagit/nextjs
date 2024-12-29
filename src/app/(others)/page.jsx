@@ -7,7 +7,9 @@ export default async function Home() {
       method: 'POST',
       cache: 'no-cache',
     })
-    data = await response.json();
+    const rawtext = await response.text();
+    data = JSON.parse(rawtext);
+    console.log(data)
   } catch (error) {
     console.log("Error fetching data in all:", error);
   }

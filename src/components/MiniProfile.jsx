@@ -1,6 +1,9 @@
+'use client'
+
 import React from 'react'
-import { UserButton, useUser } from '@clerk/nextjs'
+import { UserButton} from '@clerk/nextjs'
 import { HiDotsHorizontal } from 'react-icons/hi';
+import { useUser } from '@clerk/nextjs';
 
 export default function MiniProfile() {
   const {user} = useUser();

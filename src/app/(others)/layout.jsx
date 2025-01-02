@@ -9,8 +9,6 @@ import SessionWrapper from "@/components/SessionWrapper";
 import CommentModal from "@/components/CommentModal";
 
 
-
-
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],

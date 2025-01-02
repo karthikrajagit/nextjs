@@ -3,6 +3,7 @@ import { headers } from 'next/headers';
 import { clerkClient } from '@clerk/nextjs/server';
 import { createOrUpdateUser, deleteUser } from '@/lib/actions/user';
 
+
 export async function POST(req) {
   // You can find this in the Clerk Dashboard -> Webhooks -> choose the endpoint
   const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET;
@@ -68,18 +69,27 @@ export async function POST(req) {
         email_addresses,
         username
       );
-      if (user && eventType === 'user.created') {
+      console.log(user._id);
+      
+      if (user) {
         try {
-          await clerkClient.users.updateUserMetadata(id, {
+          console.log('Updating Clerk user metadata...');
+          console.log('Clerk ID:', id);
+          console.log('MongoDB User ID:', user._id);
+          const client = await clerkClient();
+          const response = await client.users.updateUserMetadata(id, {
             publicMetadata: {
-              userMongoId: user._id
+              userId: user._id,
             },
           });
-        } catch (error) {
-          console.log('Error updating user metadata:', error);
+          console.log('Update User Metadata Response:', response);
+        } catch (updateError) {
+          console.error('Error updating Clerk user metadata:', updateError);
         }
       }
-    } catch (error) {
+    }
+    
+     catch (error) {
       console.log('Error creating or updating user:', error);
       return new Response('Error occured', {
         status: 400,

@@ -1,4 +1,4 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, Source_Code_Pro } from "next/font/google";
 import '.././globals.css';
 
 import { ClerkProvider, ClerkLoading, ClerkLoaded } from "@clerk/nextjs";
@@ -6,16 +6,18 @@ import Loader from "@/components/Loader";
 import LeftSidebar from "@/components/LeftSidebar";
 import RightSidebar from "@/components/RightSidebar";
 import SessionWrapper from "@/components/SessionWrapper";
+import CommentModal from "@/components/CommentModal";
 
 
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const sourceCodePro = Source_Code_Pro({
+  variable: "--font-source-code-pro",
   subsets: ["latin"],
 });
 
@@ -30,7 +32,7 @@ export default function RootLayout({ children }) {
       <SessionWrapper>
         <html lang='en'>
           <body
-            className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+            className={`${inter.variable} ${sourceCodePro.variable} antialiased`}
           >
             <ClerkLoading>
               <Loader />
@@ -46,7 +48,9 @@ export default function RootLayout({ children }) {
                   <RightSidebar />
                 </div>
               </div>
+              
             </ClerkLoaded>
+            <CommentModal />
           </body>
         </html>
       </SessionWrapper>

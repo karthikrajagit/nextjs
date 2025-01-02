@@ -12,6 +12,9 @@ export default function RightSidebar() {
     e.preventDefault();
     if(input.trim==='' || !input) return;
     router.push(`/search/${input}`);
+    setTimeout(() => {
+      router.refresh();
+    }, 100)
   }
   return (
     <>

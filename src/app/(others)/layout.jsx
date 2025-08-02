@@ -1,6 +1,5 @@
 import { Inter, Source_Code_Pro } from "next/font/google";
 import '.././globals.css';
-
 import { ClerkProvider, ClerkLoading, ClerkLoaded } from "@clerk/nextjs";
 import Loader from "@/components/Loader";
 import LeftSidebar from "@/components/LeftSidebar";
